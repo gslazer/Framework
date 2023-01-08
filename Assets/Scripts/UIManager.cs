@@ -5,19 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class UIObject : MonoBehaviour
+public interface UIObject
 {
 }
-public class PopupUI : UIObject, IEscape
+public interface IPopupUI : UIObject, IEscape
 {
-    public void OnEscape()
-    {
-    }
 }
 
-public class DialogueUI : UIObject
-{
-}
 
 public interface IEscape
 {
