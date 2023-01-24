@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-public class DialobueData
+public class DialogueData
 {
     private int currentKeyValue;
     private Dictionary<int, string> data = new Dictionary<int, string>
@@ -34,5 +34,12 @@ public class DialobueData
     {
         currentKeyValue++;
         return GetCurrentString();
+    }
+
+    public void Load(List<Dictionary<string, object>> csvRawData)
+    {
+        csvRawData.ForEach(csvDict =>{
+            data.Add(csvDict["ID"], csvDict["DialogueString"]);
+        });
     }
 }

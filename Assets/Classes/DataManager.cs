@@ -8,14 +8,18 @@ using UnityEngine;
 
 public class DataManager : Singleton<DataManager>
 {
+    private Dictionary<string, DialogueData> dialogueDict = new Dictionary<string, DialogueData>();
+
     //List<Dictionary<string, object>> data_Dialogue = .Read("Dialogue");
     public override void Initialize()
     {
-        DirectoryInfo directoryInfo = new DirectoryInfo(Application.dataPath+ "/ResourceBundle"); //todo gz : edit path later
-        foreach(FileInfo File in directoryInfo.GetFiles())
+        DirectoryInfo directoryInfo = new DirectoryInfo(Application.dataPath+ "/ResourceBundle/DialogueData"); //todo gz : edit path later
+        foreach(FileInfo File in directoryInfo.GetFiles(file => file.Name.EndsWith(".csv")))
         {
             Debug.Log($"{File.FullName}");
             Debug.Log($"{File.Name}");
+            CSVReader.Read(File.Full).ForEach();
+
         }
         foreach(DirectoryInfo sub_Dir in directoryInfo.GetDirectories())
         {
@@ -26,5 +30,6 @@ public class DataManager : Singleton<DataManager>
 
     class TableLoader
     {
+
     }
 }
