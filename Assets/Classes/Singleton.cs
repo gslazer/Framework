@@ -19,7 +19,7 @@ public abstract class Singleton<T> : IInitializable where T : Singleton<T>, new(
     }
     public abstract void Initialize();
 }
-public abstract class MonoSingleton<T> : MonoBehaviour where T : Singleton<T>, new()
+public abstract class MonoSingleton<T> : MonoBehaviour
 {
     private static MonoSingleton<T> instance;
     public MonoSingleton<T> Instance

@@ -5,13 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class DataManager : Singleton<DataManager>
+public class InputReceiver : MonoBehaviour
 {
-    public override void Initialize()
+    public void Update()
     {
-    }
-
-    class TableLoader
-    {
+        
     }
 }

@@ -11,7 +11,16 @@ public interface UIObject
 public interface IPopupUI : UIObject, IEscape
 {
 }
+public class PopupUI : IPopupUI
+{
+    public void OnCLick()
+    {
+    }
 
+    public void OnEscape()
+    {
+    }
+}
 
 public interface IEscape
 {
@@ -20,9 +29,9 @@ public interface IEscape
 
 public class UIManager : Singleton<UIManager>
 {
-    Stack<PopupUI> popupStack = new Stack<PopupUI>();
+    Stack<IPopupUI> popupStack = new Stack<IPopupUI>();
     
-    public void AddPopup(PopupUI popup)
+    public void AddPopup(IPopupUI popup)
     {
         popupStack.Push(popup);
     }
@@ -36,4 +45,5 @@ public class UIManager : Singleton<UIManager>
     public override void Initialize()
     {
     }
+
 }
