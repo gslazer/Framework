@@ -1,6 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-
+/// <summary>
+/// Enum과 1대1로 매칭되는 특정 자식 클래스의 인스턴스를 생성하기 위한 클래스 
+/// 
+/// 1.생성자 EnumTypeCreator(string prefix)에서 TBaseObject를 상속받고, 이름이 prefix + TEnum.name 로 정의된 클래스를 찾아
+/// 그 Type을 멤버 Dictionary<TEnum,TYpe> mType으로 보관한다.
+/// 
+/// 2. 필요한 곳에서 Create(TEnum e)를 사용. TEnum을 인자로 해당 enum에 매칭되는 클래스 Type을 mType에서 찾아, 인스턴스를 생성하여 리턴한다.
+/// 
+/// </summary>
+/// <typeparam name="TEnum"></typeparam>
+/// <typeparam name="TBaseObject"></typeparam>
 public class EnumTypeCreator<TEnum, TBaseObject> where TEnum : Enum where TBaseObject : class
 {
     IDictionary<TEnum, Type> mTypes;
