@@ -8,6 +8,15 @@ using System.Collections.Generic;
 /// 
 /// 2. 필요한 곳에서 Create(TEnum e)를 사용. TEnum을 인자로 해당 enum에 매칭되는 클래스 Type을 mType에서 찾아, 인스턴스를 생성하여 리턴한다.
 /// 
+/// 생각해볼 점 
+/// 1. TEnum이 class와 1:1 매칭된다면 굳이 Enum이 필요할까?
+/// Class Type을 그대로 인자로 사용하는것보다 어떤 장점이 있을지?
+/// 인스턴스의 생성을 제어하기 위한 Factory 이상의 이점이 필요하다.
+/// 2. 같은 클래스도 다른 prefab에서 동작할 수 있기 때문에,
+/// 프리팹 인스턴스를 enum으로 관리하는 것은 유용할 수 있으나, Monobehaviour를 상속받은 클래스는
+/// 생성자를 사용 할 수 없기 때문에 이 클래스를 그대로 적용할 수는 없다.
+/// 허나 이를 Monobehaviour용으로 fix하여 ResourceManager로서 사용하는것은 유용해 보인다.
+/// 
 /// </summary>
 /// <typeparam name="TEnum"></typeparam>
 /// <typeparam name="TBaseObject"></typeparam>

@@ -5,18 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public interface UIObject
+public interface IUILayer : IEscape
 {
 }
-public interface IPopupUI : UIObject, IEscape
+public interface IPopupUI : IUILayer
 {
+}
+public interface IClickableUI
+{
+    void OnCLick();
 }
 public class PopupUI : IPopupUI
 {
-    public void OnCLick()
-    {
-    }
-
     public void OnEscape()
     {
     }
@@ -29,17 +29,24 @@ public interface IEscape
 
 public class UIManager : Singleton<UIManager>
 {
-    Stack<IPopupUI> popupStack = new Stack<IPopupUI>();
+    Stack<IUILayer> layerStack = new Stack<IUILayer>();
     
-    public void AddPopup(IPopupUI popup)
+    public void AddLayer(IUILayer iUILayer)
     {
-        popupStack.Push(popup);
+        layerStack.Push(iUILayer);
     }
 
     public void PopPopup()
     {
-        var popup = popupStack.Pop();
+        var popup = layerStack.Pop();
         popup.OnEscape();
+    }
+
+    public IPopupUI GetTopUILayer()
+    {
+        if(layerStack.Count==0)
+            return null;
+        return layerStack.Peek();
     }
 
     public override void Initialize()
