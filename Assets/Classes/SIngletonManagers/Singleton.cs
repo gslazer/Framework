@@ -19,9 +19,11 @@ public abstract class Singleton<T> : IInitializable where T : Singleton<T>, new(
     }
     public abstract void Initialize();
 }
-public abstract class MonoSingleton<T> : MonoBehaviour
+public abstract class MonoSingleton<T> : MonoBehaviour, IInitializable
 {
     private static MonoSingleton<T> instance;
+    private bool instantiated = false;
+
     public MonoSingleton<T> Instance
     {
         get
@@ -30,5 +32,16 @@ public abstract class MonoSingleton<T> : MonoBehaviour
                 instance = this;
             return instance;
         }
+    }
+    public virtual void Initialize()
+    {
+        if(instantiated)
+        {
+            Debug.LogWarning($"Singleton.Instantiate() : [{gameObject.name}] Is Already Instantiated!");
+            return;
+        }
+        Instantiate(gameObject);
+        DontDestroyOnLoad(gameObject);
+        instantiated = true;
     }
 }
