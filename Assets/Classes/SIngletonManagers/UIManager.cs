@@ -42,7 +42,7 @@ public class UIManager : Singleton<UIManager>
         popup.OnEscape();
     }
 
-    public IPopupUI GetTopUILayer()
+    public IUILayer GetTopUILayer()
     {
         if(layerStack.Count==0)
             return null;

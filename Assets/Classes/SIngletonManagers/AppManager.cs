@@ -38,4 +38,8 @@ public class Debug
     {
         UnityEngine.Debug.LogError(message);
     }
+    public static void LogWarning(object message)
+    {
+        UnityEngine.Debug.LogWarning(message);
+    }
 }

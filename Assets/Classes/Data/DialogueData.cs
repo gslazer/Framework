@@ -38,8 +38,10 @@ public class DialogueData
 
     public void Load(List<Dictionary<string, object>> csvRawData)
     {
-        csvRawData.ForEach(csvDict =>{
-            data.Add(csvDict["ID"], csvDict["DialogueString"]);
+        csvRawData.ForEach(csvLineDict =>{
+            int index = Convert.ToInt32(csvLineDict["Index"]);
+            string str = csvLineDict["String"].ToString();
+            data.Add(index, str);
         });
     }
 }

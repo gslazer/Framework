@@ -18,7 +18,7 @@ public class PurchaseManager : MonoBehaviour
 
     public void OnPurchaseComplete(string succeedMsg)
     {
-        GameAssistant.Instance.CreateMessagePopup("succeedMsg");
+        //GameAssistant.Instance.CreateMessagePopup("succeedMsg");
     }
     public void OnPurchaseSuceess(string succeedMsg)
     {
@@ -31,12 +31,12 @@ public class PurchaseManager : MonoBehaviour
     }
     IEnumerator CoConfigPurchaseData()
     {
-        while (NetManager.Instance == null || NetManager.Instance.configData == null)
-            yield return 0;
-        TargetMarket purchaseSDK = NetManager.Instance.configData.purchaseSDK;
+        /*while (NetManager.Instance == null || NetManager.Instance.configData == null)
+            yield return 0;*/
+        TargetMarket purchaseSDK = TargetMarket.GOOGLE;// NetManager.Instance.configData.purchaseSDK;
         if (purchaseSDK == TargetMarket.NONE)
         {
-            Debug.LogError($"[{NetManager.Instance.configData.purchaseSDK}] IAP Handler Can not Initialized!");
+            //Debug.LogError($"[{NetManager.Instance.configData.purchaseSDK}] IAP Handler Can not Initialized!");
             yield return 0;
         }
 
@@ -63,18 +63,18 @@ public class PurchaseManager : MonoBehaviour
     {
         while (!IAPHandler.CheckInit())
             yield return 0;
-        Debug.Log($"[{NetManager.Instance.configData.purchaseSDK}] IAP Handler Initialized!");
+        //Debug.Log($"[{NetManager.Instance.configData.purchaseSDK}] IAP Handler Initialized!");
     }
     public void OnPurchaseButtonClick(string productId)
     {
         if (IAPHandler == null)
         {
-            Debug.LogError($"PurchaseManager : [{NetManager.Instance.configData.purchaseSDK}] IAPHandler is null! ");
+            //Debug.LogError($"PurchaseManager : [{NetManager.Instance.configData.purchaseSDK}] IAPHandler is null! ");
             return;
         }
         if (!IAPHandler.CheckInit())
         {
-            Debug.LogError($"PurchaseManager : [{NetManager.Instance.configData.purchaseSDK}] IAPHandler is not Initialized yet! ");
+            //Debug.LogError($"PurchaseManager : [{NetManager.Instance.configData.purchaseSDK}] IAPHandler is not Initialized yet! ");
             return;
         }
         IAPHandler.OnPurchaseButtonClick(productId);
@@ -86,7 +86,7 @@ public class PurchaseManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
 #if UNITY_EDITOR
-            Debug.Log($"[{NetManager.Instance.configData.purchaseSDK}] IAP Handler not Initialized On Unity Editor.");
+            //Debug.Log($"[{NetManager.Instance.configData.purchaseSDK}] IAP Handler not Initialized On Unity Editor.");
 #elif UNITY_ANDROID
             StartCoroutine(CoConfigPurchaseData());
 #endif

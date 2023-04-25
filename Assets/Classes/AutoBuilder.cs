@@ -1,13 +1,38 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using DG.DemiEditor;
 using UnityEditor;
 using UnityEditor.Build;
 using UnityEngine;
 
 //gz : Original From https://lhamed.github.io/66th-post-copy-2/
+
+public enum AppIdentifier
+{
+    none,
+    Identifier1,
+    Identifier2,
+    Identifier3
+}
+
+public enum TargetServer
+{
+    TEST,
+    QA,
+    KR,
+    HK
+}
+
+public enum TargetMarket
+{
+    GOOGLE,
+    ZARINPAL,
+    NONE
+}
+public enum DefaultLanguage
+{
+    Sys
+}
 public class AutoBuilder : ScriptableObject
 {
     static readonly string STR_TARGET_DIR = "C:/project/Build/";
@@ -61,13 +86,13 @@ public class AutoBuilder : ScriptableObject
         PerformBuildAOS();
     }
 
-    [MenuItem("Custom Tools/Build For Android/HK - Zarinpal")]
+    /*[MenuItem("Custom Tools/Build For Android/HK - Zarinpal")]
     public static void BuildIdentifier3Zarinpal()
     {
         SetData(AppIdentifier.Identifier3, TargetServer.HK, TargetMarket.ZARINPAL);
         eDefaultLanguage = DefaultLanguage.Persian;
         PerformBuildAOS();
-    }    
+    }    */
 
     public static void PerformBuildAOS()
     {
@@ -118,7 +143,7 @@ public class AutoBuilder : ScriptableObject
 
     public static void InitConfigData()
     {
-        ConfigData configData = new ConfigData();
+        /*ConfigData configData = new ConfigData();
         configData.version = "1.0";
         configData.account = "";
         configData.serverIp = "";
@@ -128,7 +153,7 @@ public class AutoBuilder : ScriptableObject
         configData.language = eDefaultLanguage;
 
         string toJson = JsonUtility.ToJson(configData);
-        File.WriteAllText("Assets/Resources/config/config.json", toJson);
+        File.WriteAllText("Assets/Resources/config/config.json", toJson);*/
     }
 
     private static string[] FindEnabledEditorScenes()

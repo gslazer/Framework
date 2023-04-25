@@ -4,7 +4,7 @@ using UnityEngine;
 public class ObjectPool<TEnum> : MonoBehaviour
 {
     //change SerializeField to ShowInInspector after import OdinInspector to Check objects at Inspector
-    [SerializeField] private Dictionary <TEnum, Stack<GameObject>> dictOjectPool = new Dictionary<Type, Stack<GameObject>>();
+    [SerializeField] private Dictionary <TEnum, Stack<GameObject>> dictOjectPool = new Dictionary<TEnum, Stack<GameObject>>();
     public GameObject PopObject(TEnum type)
     {
         if(!dictOjectPool.TryGetValue(type, out var stackObj))
@@ -19,12 +19,12 @@ public class ObjectPool<TEnum> : MonoBehaviour
         }
         return stackObj.Pop();
     }
-    public void PushObject(GameObject gameObj)
+    public void PushObject(TEnum type, GameObject gameObj)
     {
         if(!dictOjectPool.TryGetValue(type, out var stackObj))
         {    
             stackObj = new Stack<GameObject>();
-            dictOjectPool.Add(typeof(gameObj), stackObj);
+            dictOjectPool.Add(type, stackObj);
         }
         stackObj.Push(gameObj);
         gameObj.SetActive(false);

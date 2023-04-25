@@ -9,7 +9,7 @@ using UnityEngine.EventSystems;
 
 public interface IDialogueUI : IPopupUI
 {
-    public void SetData(DialobueData data);
+    public void SetData(DialogueData data);
 
     public void Show();
     public void ShowString(string str);
@@ -20,7 +20,7 @@ public interface IDialogueUI : IPopupUI
 
 public class DialogueUI : MonoBehaviour, IDialogueUI, IPointerClickHandler
 {
-    DialobueData data;
+    DialogueData data;
     [SerializeField] private TextMeshProUGUI dialogueString;
 
     public void OnClick()
@@ -33,7 +33,7 @@ public class DialogueUI : MonoBehaviour, IDialogueUI, IPointerClickHandler
         ShowString(nextStr);
     }
 
-    public void SetData(DialobueData data)
+    public void SetData(DialogueData data)
     {
         this.data = data;
     }
@@ -71,8 +71,9 @@ public class DialogueUI : MonoBehaviour, IDialogueUI, IPointerClickHandler
     
     void Awake()
     {
-        DialobueData data = new DialobueData();
+        DialogueData data = new DialogueData();
         SetData(data);
         ShowString(data.GetCurrentString());
     }
+
 }
