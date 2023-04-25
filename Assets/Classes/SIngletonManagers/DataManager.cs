@@ -16,16 +16,22 @@ public class DataManager : Singleton<DataManager>
     public override void Initialize()
     {
         DirectoryInfo directoryInfo = new DirectoryInfo(Application.dataPath+"/Resources/Data/DialogueData"); //todo gz : edit path later
-        directoryInfo.GetFiles(".csv").ForEach(File =>
+        var fileList = directoryInfo.GetFiles("*.csv");
+        fileList.ForEach(file =>
         {
-            Debug.Log($"{File.FullName}");
-            Debug.Log($"{File.Name}");
-            var csvRawData = CSVReader.Read(File.FullName);
-
+            Debug.Log($"{file.FullName}");
+            Debug.Log($"{file.Name}");
+            var csvRawData = CSVReader.Read("Data/DialogueData/" + file.Name);
             var dialogueData = new DialogueData();
             dialogueData.Load(csvRawData);
-            dialogueDict.Add(File.Name, dialogueData);
+            dialogueDict.Add(file.Name.Replace(".csv", ""), dialogueData);
         });
+    }
+
+    public DialogueData GetDialogueData(string dataName)
+    {
+        dialogueDict.TryGetValue(dataName, out DialogueData data);
+        return data;
     }
 
     class TableLoader

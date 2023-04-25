@@ -7,17 +7,20 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
- 
+
+/// <summary>
+/// ResourceManager.Load 를 통해 동작하는 CSV Reader
+/// </summary>
 public class CSVReader
 {
     static string SPLIT_RE = @",(?=(?:[^""]*""[^""]*"")*(?![^""]*""))";
     static string LINE_SPLIT_RE = @"\r\n|\n\r|\n|\r";
-    static char[] TRIM_CHARS = { '\"' };
- 
+    static char[] TRIM_CHARS = { '\"' };    
+
     public static List<Dictionary<string, object>> Read(string file)
     {
         var list = new List<Dictionary<string, object>>();
-        TextAsset data = ResourceManager.Load (file) as TextAsset;
+        TextAsset data = ResourceManager.Load<TextAsset>(file.Replace(".csv", "")); //Resources.Load() 를 사용할 때 경로에 확장자를 포함시키지 않아야 한다.
  
         var lines = Regex.Split (data.text, LINE_SPLIT_RE);
  

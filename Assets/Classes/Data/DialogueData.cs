@@ -3,26 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine.UIElements;
+
 public class DialogueData
 {
     private int currentKeyValue;
-    private Dictionary<int, string> data = new Dictionary<int, string>
-    {
-        { 0, "0입니다~~" },
-        { 1, "ㅁㄴㅇㄹ" },
-        { 2, "두번쨰라인"},
-        { 3, "33333"},
-        { 4, "44번쨰라인"},
-        { 5, "555번쨰라인"},
-        { 6, "666번쨰라인"}
-    };
+    private Dictionary<int, string> data;
 
-    public void SetData(Dictionary<int, string> data)
-    {
-        this.data = data;
-    }
     public string GetCurrentString()
     {
+        if (data == null)
+        {
+            Debug.LogError("DialogueData.GetCurrentString() : data is null!");
+            return "";
+        }
         if (!data.ContainsKey(currentKeyValue))
         {
             Debug.LogError($"DialogueData don't have Data of key : {currentKeyValue}");
@@ -38,10 +32,14 @@ public class DialogueData
 
     public void Load(List<Dictionary<string, object>> csvRawData)
     {
+        data = new Dictionary<int, string>();
         csvRawData.ForEach(csvLineDict =>{
             int index = Convert.ToInt32(csvLineDict["Index"]);
             string str = csvLineDict["String"].ToString();
             data.Add(index, str);
         });
+
+        //첫번쨰 Index를 currentKeyValue로
+        currentKeyValue = data.First().Key;
     }
 }

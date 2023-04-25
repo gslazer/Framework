@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -66,14 +62,11 @@ public class DialogueUI : MonoBehaviour, IDialogueUI, IPointerClickHandler
         Next();
     }
 
-
     //to delete gz : 여기부터는 임시 씬 스크립트
-    
-    void Awake()
+    void Start()
     {
-        DialogueData data = new DialogueData();
+        DialogueData data = DataManager.Instance.GetDialogueData("SampleDialogueData");
         SetData(data);
-        ShowString(data.GetCurrentString());
+        ShowString(data?.GetCurrentString());
     }
-
 }
