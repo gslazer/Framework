@@ -19,17 +19,20 @@ public abstract class Singleton<T> : IInitializable where T : Singleton<T>, new(
     }
     public abstract void Initialize();
 }
-public abstract class MonoSingleton<T> : MonoBehaviour, IInitializable
+public abstract class MonoSingleton<T> : MonoBehaviour, IInitializable where T : MonoSingleton<T>
 {
     private static MonoSingleton<T> instance;
     private bool instantiated = false;
 
-    public MonoSingleton<T> Instance
+    public static MonoSingleton<T> Instance
     {
         get
         {
             if (instance == null)
-                instance = this;
+            {
+                GameObject obj = new GameObject(typeof(T).Name);
+                instance = obj.AddComponent(typeof(T)) as T;
+            }
             return instance;
         }
     }
@@ -40,7 +43,6 @@ public abstract class MonoSingleton<T> : MonoBehaviour, IInitializable
             Debug.LogWarning($"Singleton.Instantiate() : [{gameObject.name}] Is Already Instantiated!");
             return;
         }
-        Instantiate(gameObject);
         DontDestroyOnLoad(gameObject);
         instantiated = true;
     }

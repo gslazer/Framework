@@ -7,6 +7,8 @@ using UnityEngine;
 
 public interface IUILayer : IEscape
 {
+    void Show();
+    void Close();
 }
 public interface IPopupUI : IUILayer
 {
@@ -17,7 +19,15 @@ public interface IClickableUI
 }
 public class PopupUI : IPopupUI
 {
+    public void Close()
+    {
+    }
+
     public void OnEscape()
+    {
+    }
+
+    public void Show()
     {
     }
 }

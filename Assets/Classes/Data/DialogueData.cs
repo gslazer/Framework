@@ -15,18 +15,20 @@ public class DialogueData
         if (data == null)
         {
             Debug.LogError("DialogueData.GetCurrentString() : data is null!");
-            return "";
+            return null;
         }
         if (!data.ContainsKey(currentKeyValue))
         {
             Debug.LogError($"DialogueData don't have Data of key : {currentKeyValue}");
-            return "";
+            return null;
         }
         return data[currentKeyValue];
     }
     public string GetNextString()
     {
         currentKeyValue++;
+        if (currentKeyValue >= data.Count)
+            return null;
         return GetCurrentString();
     }
 

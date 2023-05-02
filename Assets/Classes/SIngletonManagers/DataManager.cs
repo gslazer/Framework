@@ -1,11 +1,6 @@
 ﻿using Sirenix.Utilities;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 public class DataManager : Singleton<DataManager>
@@ -30,12 +25,12 @@ public class DataManager : Singleton<DataManager>
 
     public DialogueData GetDialogueData(string dataName)
     {
-        dialogueDict.TryGetValue(dataName, out DialogueData data);
+        if (!dialogueDict.TryGetValue(dataName, out DialogueData data))
+            return null;
         return data;
     }
 
     class TableLoader
     {
-
     }
 }

@@ -26,6 +26,8 @@ public class DialogueUI : MonoBehaviour, IDialogueUI, IPointerClickHandler
     public void Next()
     {
         var nextStr = data.GetNextString();
+        if (nextStr == null)
+            Close();
         ShowString(nextStr);
     }
 
@@ -66,7 +68,14 @@ public class DialogueUI : MonoBehaviour, IDialogueUI, IPointerClickHandler
     void Start()
     {
         DialogueData data = DataManager.Instance.GetDialogueData("SampleDialogueData");
+        if (data == null)
+            Close();
         SetData(data);
         ShowString(data?.GetCurrentString());
+    }
+
+    public void Close()
+    {
+        Destroy(gameObject);
     }
 }
