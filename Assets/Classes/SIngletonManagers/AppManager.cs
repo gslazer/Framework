@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 
-public class AppManager : Singleton<AppManager>
+public class AppManager : MonoSingleton<AppManager>
 {
     public override void Initialize()
     {
