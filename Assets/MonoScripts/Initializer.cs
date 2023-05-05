@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Initializer : MonoBehaviour, IInitializable
+public class Initializer : MonoSingleton<Initializer>, IInitializable
 {
-    public void Initialize()
+    public void InitManagers()
     {
         AppManager.Instance.Initialize();
         DataManager.Instance.Initialize();
@@ -18,6 +18,6 @@ public class Initializer : MonoBehaviour, IInitializable
 
     void Awake()
     {
-        Initialize();
+        InitManagers();
     }
 }

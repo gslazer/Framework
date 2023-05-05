@@ -19,27 +19,13 @@ public class AppManager : MonoSingleton<AppManager>
     {
         Application.Quit();
     }
-}
 
-public class Debug
-{
-
-    //[Conditional("Debug")]
-    public static void Log(object message)
+    private void Update()
     {
-        UnityEngine.Debug.Log(message);
-    }
-    //[Conditional("Debug")]
-    public static void Log(object message, Object context)
-    {
-        UnityEngine.Debug.Log(message, context);
-    }
-    public static void LogError(object message)
-    {
-        UnityEngine.Debug.LogError(message);
-    }
-    public static void LogWarning(object message)
-    {
-        UnityEngine.Debug.LogWarning(message);
+        if(Input.GetKeyUp(KeyCode.Escape))
+        {
+            Debug.Log("Escape Pushed!");
+            UIManager.Instance.OnEscape();
+        }
     }
 }

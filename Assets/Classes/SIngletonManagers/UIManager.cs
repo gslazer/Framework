@@ -15,7 +15,7 @@ public interface IPopupUI : IUILayer
 }
 public interface IClickableUI
 {
-    void OnCLick();
+    void OnClick();
 }
 public class PopupUI : IPopupUI
 {
@@ -37,30 +37,36 @@ public interface IEscape
     public void OnEscape();
 }
 
-public class UIManager : Singleton<UIManager>
+public class UIManager : Singleton<UIManager>, IEscape
 {
-    Stack<IUILayer> layerStack = new Stack<IUILayer>();
-    
-    public void AddLayer(IUILayer iUILayer)
+    Stack<IUILayer> uiLayers = new Stack<IUILayer>();
+
+    public void PushUI(IUILayer iUILayer)
     {
-        layerStack.Push(iUILayer);
+        uiLayers.Push(iUILayer);
     }
 
-    public void PopPopup()
+    public void PopUI()
     {
-        var popup = layerStack.Pop();
+        var popup = uiLayers.Pop();
         popup.OnEscape();
     }
 
-    public IUILayer GetTopUILayer()
+    public IUILayer PeekUI()
     {
-        if(layerStack.Count==0)
+        if(uiLayers.Count==0)
             return null;
-        return layerStack.Peek();
+        return uiLayers.Peek();
     }
 
     public override void Initialize()
     {
     }
 
+    public void OnEscape()
+    {
+        if (uiLayers.Count == 0)
+            return;
+        uiLayers.Peek().OnEscape();
+    }
 }

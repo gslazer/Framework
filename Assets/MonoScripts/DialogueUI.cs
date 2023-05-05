@@ -5,18 +5,16 @@ using UnityEngine.EventSystems;
 
 public interface IDialogueUI : IPopupUI
 {
-    public void SetData(DialogueData data);
-
-    public void Show();
+    public void SetData(DialogueTable data);
     public void ShowString(string str);
     public void Skip();
     public void Next();
     public void Hide();
 }
 
-public class DialogueUI : MonoBehaviour, IDialogueUI, IPointerClickHandler
+public class DialogueUI : MonoBehaviour, IDialogueUI, IPointerClickHandler, IClickableUI
 {
-    DialogueData data;
+    DialogueTable data;
     [SerializeField] private TextMeshProUGUI dialogueString;
 
     public void OnClick()
@@ -31,7 +29,7 @@ public class DialogueUI : MonoBehaviour, IDialogueUI, IPointerClickHandler
         ShowString(nextStr);
     }
 
-    public void SetData(DialogueData data)
+    public void SetData(DialogueTable data)
     {
         this.data = data;
     }
@@ -56,7 +54,7 @@ public class DialogueUI : MonoBehaviour, IDialogueUI, IPointerClickHandler
 
     public void OnEscape()
     {
-        throw new NotImplementedException();
+
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -67,7 +65,7 @@ public class DialogueUI : MonoBehaviour, IDialogueUI, IPointerClickHandler
     //to delete gz : 여기부터는 임시 씬 스크립트
     void Start()
     {
-        DialogueData data = DataManager.Instance.GetDialogueData("SampleDialogueData");
+        DialogueTable data = DataManager.Instance.GetDialogueData("SampleDialogueData");
         if (data == null)
             Close();
         SetData(data);
