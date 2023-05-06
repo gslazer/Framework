@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 using UnityEngine.UIElements;
 
 
-public struct DialogueData
+public class DialogueTable : TableData <DialogueTable.Data>
 {
-    public int Index;
-    public string String;
-}
-public class DialogueTable : TableData <DialogueData>
-{
+    public class Data
+    {
+        public int Index;
+        public string String;
+    }
     //private Data dataDict;
 
     private int currentKeyValue;
