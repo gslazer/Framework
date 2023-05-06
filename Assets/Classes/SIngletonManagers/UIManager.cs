@@ -17,21 +17,6 @@ public interface IClickableUI
 {
     void OnClick();
 }
-public class PopupUI : IPopupUI
-{
-    public void Close()
-    {
-    }
-
-    public void OnEscape()
-    {
-    }
-
-    public void Show()
-    {
-    }
-}
-
 public interface IEscape
 {
     public void OnEscape();
