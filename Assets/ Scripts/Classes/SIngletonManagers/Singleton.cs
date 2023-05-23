@@ -23,6 +23,7 @@ public abstract class MonoSingleton<T> : MonoBehaviour, IInitializable where T :
 {
     private static MonoSingleton<T> instance;
     private bool instantiated = false;
+    public bool Instantiated { get => instantiated; }
 
     public static MonoSingleton<T> Instance
     {
@@ -45,5 +46,9 @@ public abstract class MonoSingleton<T> : MonoBehaviour, IInitializable where T :
         }
         DontDestroyOnLoad(gameObject);
         instantiated = true;
+    }
+    void Awake() {
+        if(!instantiated)
+            Initialize();
     }
 }

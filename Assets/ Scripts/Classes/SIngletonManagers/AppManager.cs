@@ -7,9 +7,6 @@ using UnityEngine;
 
 public class AppManager : MonoSingleton<AppManager>
 {
-    public override void Initialize()
-    {
-    }
 
     public void Pause()
     {
